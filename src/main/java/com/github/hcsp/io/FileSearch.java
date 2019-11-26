@@ -17,7 +17,7 @@ public class FileSearch {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
             int i = 1;
-            while((line = bufferedReader.readLine())!=null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 if (line.contains(text)) {
                     return i;
                 }
