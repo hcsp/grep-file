@@ -14,16 +14,18 @@ public class FileSearch {
              fr =new FileReader(target);
              br=new BufferedReader(fr);
              String string=null;
-            while(true){
+            while (true) {
                 try {
-                    if ((string = br.readLine()) == null) break;
+                    if ((string = br.readLine()) == null) {
+                        break;
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                     throw new IllegalArgumentException();
                 }
-                if(string.contains(text)){
+                if (string.contains(text)) {
                     return i;
-                }else {
+                } else {
                     i++;
                 }
             }
@@ -31,8 +33,6 @@ public class FileSearch {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             throw new IllegalArgumentException();
-        } finally {
-
         }
     }
 
