@@ -1,5 +1,8 @@
 package com.github.hcsp.io;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.LineIterator;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,21 +15,25 @@ public class FileSearch {
     // 请不要让这个方法抛出checked exception
     public static int grep(File target, String text) {
 
-        List<String> results = null;
+
+        LineIterator it = null;
+        int currentLint = 1;
         try {
-            results = Files.readAllLines(Paths.get(target.getAbsolutePath()));
+            it = FileUtils.lineIterator(target, "UTF-8");
+            while (it.hasNext()) {
+                String line = it.nextLine();
+                if (line.contains(text)) {
+                    return currentLint;
+                }
+                currentLint++;
+            }
+            return -1;
         } catch (IOException e) {
             e.printStackTrace();
             throw new IllegalArgumentException(e);
+        } finally {
+            LineIterator.closeQuietly(it);
         }
-
-        for (int i = 0; i < results.size(); i++) {
-            if (results.get(i).contains(text)) {
-                return i + 1;
-            }
-        }
-
-        return -1;
 
     }
 
