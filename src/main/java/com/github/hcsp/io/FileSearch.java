@@ -12,7 +12,6 @@ public class FileSearch {
     // 请不要让这个方法抛出checked exception
     public static int grep(File target, String text) {
 
-
         LineIterator it = null;
         int currentLint = 1;
         try {
