@@ -18,10 +18,10 @@ public class FileSearch {
                 lineCount++;
             }
             return -1;
-        } catch (IOException e) {
-            throw new FileNotFoundException("文件名为：" + target + "找不到", e);
         } catch (OutOfMemoryError e) {
             throw new FileTooBigError("这个文件太大了");
+        } catch (IOException e) {
+            throw new IllegalArgumentException("名为" + target + "的文件找不到", e);
         }
     }
 
@@ -36,9 +36,4 @@ public class FileSearch {
         }
     }
 
-    public static class FileNotFoundException extends RuntimeException {
-        public FileNotFoundException(String message, Throwable cause) {
-            super(message, cause);
-        }
-    }
 }
