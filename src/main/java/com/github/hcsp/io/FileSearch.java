@@ -10,6 +10,7 @@ public class FileSearch {
         if (text == null || text.equals("")) {
             throw new IllegalArgumentException("参数错误");
         }
+
         BufferedReader reader = null;
         int temp = 0;
         try {
@@ -22,7 +23,7 @@ public class FileSearch {
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("异常信息为: " + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }
