@@ -11,9 +11,10 @@ public class FileSearch {
     // 请不要让这个方法抛出checked exception
     public static int grep(File target, String text) {
         int lineIncludesTextNumber = -1;
+        BufferedReader bufferedReader = null;
         try {
             int lineNumber = 1;
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(target));
+            bufferedReader = new BufferedReader(new FileReader(target));
             while (true) {
                 String lineContent = bufferedReader.readLine();
                 if (lineContent == null) {
@@ -28,6 +29,14 @@ public class FileSearch {
             return lineIncludesTextNumber;
         } catch (IOException e) {
             throw new IllegalArgumentException();
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    throw new IllegalArgumentException();
+                }
+            }
         }
     }
 
