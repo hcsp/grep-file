@@ -20,7 +20,7 @@ public class FileSearch {
                 ++Number;
             }
         } catch (FileNotFoundException e) {
-            new RuntimeException();
+           throw  new IllegalArgumentException();
         }
         return -1;
     }
