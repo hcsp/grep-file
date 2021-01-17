@@ -10,18 +10,16 @@ public class FileSearch {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(target));
             int i = 0;
-            while (true) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
                 i++;
-                String line = bufferedReader.readLine();
-                if (line == null) {
-                    return -1;
-                }
                 if (line.contains(text)) {
                     return i;
                 }
             }
+            return -1;
         } catch (IOException e) {
-            throw new IllegalArgumentException("文件不存在或者无法被读取",e);
+            throw new IllegalArgumentException("文件不存在或者无法被读取", e);
         }
 
     }
