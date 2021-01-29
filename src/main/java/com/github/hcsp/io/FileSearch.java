@@ -35,5 +35,6 @@ public class FileSearch {
     public static void main(String[] args) {
         File projectDir = new File(System.getProperty("basedir", System.getProperty("user.dir")));
         System.out.println("结果行号：" + grep(new File(projectDir, "log.txt"), "BBB"));
+        System.out.println("结果行号：" + grep(new File(projectDir, "log.txt"), "DDD"));
     }
 }
