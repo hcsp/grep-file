@@ -8,14 +8,8 @@ public class FileSearch {
     // 请不要让这个方法抛出checked exception
     public static int grep(File target, String text) {
         int result = -1;
-        if (!target.exists()) {
-            throw new IllegalArgumentException();
-        }
-        /*FileReader fileReader = null;
-        BufferedReader reader = null;*/
+
         try (FileReader fileReader = new FileReader(target); BufferedReader reader = new BufferedReader(fileReader)) {
-            /*fileReader = new FileReader(target);
-            reader = new BufferedReader(fileReader);*/
             String line;
             int temp = 0;
             while ((line = reader.readLine()) != null) {
@@ -27,9 +21,11 @@ public class FileSearch {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            throw new IllegalArgumentException(e);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return result;
     }
 
