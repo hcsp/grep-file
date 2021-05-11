@@ -14,7 +14,7 @@ public class FileSearch {
             int temp = 0;
             while ((line = reader.readLine()) != null) {
                 temp++;
-                if (line.trim().equals(text)) {
+                if (line.contains(text)) {
                     result = temp;
                     break;
                 }
