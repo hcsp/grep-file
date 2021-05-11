@@ -11,38 +11,24 @@ public class FileSearch {
         if (!target.exists()) {
             throw new IllegalArgumentException();
         }
-        FileReader fileReader = null;
-        BufferedReader reader = null;
-        try {
-            fileReader = new FileReader(target);
-            reader = new BufferedReader(fileReader);
+        /*FileReader fileReader = null;
+        BufferedReader reader = null;*/
+        try (FileReader fileReader = new FileReader(target); BufferedReader reader = new BufferedReader(fileReader)) {
+            /*fileReader = new FileReader(target);
+            reader = new BufferedReader(fileReader);*/
             String line;
             int temp = 0;
             while ((line = reader.readLine()) != null) {
                 temp++;
                 if (line.trim().equals(text)) {
                     result = temp;
+                    break;
                 }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (fileReader != null) {
-                try {
-                    fileReader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return result;
     }
