@@ -13,10 +13,12 @@ public class FileSearch {
         try {
             int lineNumber = 0;
             BufferedReader br = new BufferedReader(new FileReader(target));
-            String lineStr ;
+            String lineStr;
             while ((lineStr = br.readLine()) != null) {
                 lineNumber++;
-                if (lineStr.contains(text)) return lineNumber;
+                if (lineStr.contains(text)) {
+                    return lineNumber;
+                }
             }
             return -1;
         } catch (IllegalArgumentException | IOException e) {
