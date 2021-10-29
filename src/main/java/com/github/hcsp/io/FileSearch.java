@@ -31,23 +31,24 @@ public class FileSearch {
         int count = 0;
         String str = null;
         try {
-            while ((str = bufferedReader.readLine()) != null) {
+            str = bufferedReader.readLine();
+            while (str != null) {
                 count += 1;
                 System.out.println(str);
                 System.out.println("text");
                 System.out.println(text);
+                str = bufferedReader.readLine();
                 if (str.equals(text)) {
                     return count;
                 }
             }
-            inputStream.close();
-            bufferedReader.close();
+            return -1;
+//            inputStream.close();
+//            bufferedReader.close();
         } catch (IOException e) {
             throw new NotThrowCheckedException("不要抛运行时异常", e);
-
         }
 
-        return -1;
     }
 
     public static void main(String[] args) {
