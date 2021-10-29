@@ -3,7 +3,6 @@ package com.github.hcsp.io;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -21,34 +20,21 @@ public class FileSearch {
 
 
     public static int grep(File target, String text) {
-        FileInputStream inputStream = null;
         try {
-            inputStream = new FileInputStream(target);
-        } catch (FileNotFoundException e) {
-            throw new IllegalArgumentException();
-        }
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        int count = 0;
-        String str = null;
-        try {
-            str = bufferedReader.readLine();
-            while (str != null) {
+            FileInputStream inputStream = new FileInputStream(target);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            int count = 0;
+            String str;
+            while ((str = bufferedReader.readLine())!= null) {
                 count += 1;
-                System.out.println(str);
-                System.out.println("text");
-                System.out.println(text);
-                str = bufferedReader.readLine();
-                if (str.equals(text)) {
+                if (str.contains(text)) {
                     return count;
                 }
             }
             return -1;
-//            inputStream.close();
-//            bufferedReader.close();
         } catch (IOException e) {
-            throw new NotThrowCheckedException("不要抛运行时异常", e);
+            throw new IllegalArgumentException();
         }
-
     }
 
     public static void main(String[] args) {
