@@ -1,6 +1,10 @@
 package com.github.hcsp.io;
 
-import java.io.*;
+
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class FileSearch {
@@ -12,8 +16,8 @@ public class FileSearch {
             BufferedReader br = new BufferedReader(new FileReader(target));
             String currentLine;
             AtomicInteger count = new AtomicInteger(1);
-            while ( (currentLine = br.readLine()) != null) {
-                if(currentLine.contains(text)) {
+            while ((currentLine = br.readLine()) != null) {
+                if (currentLine.contains(text)) {
                     return count.get();
                 }
                 count.getAndIncrement();
