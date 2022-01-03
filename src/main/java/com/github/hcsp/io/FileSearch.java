@@ -1,12 +1,10 @@
 package com.github.hcsp.io;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class FileSearch {
     // 找到第一个包含text的行的行号，行号从1开始计算。若没找到，则返回-1。
