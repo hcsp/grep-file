@@ -2,8 +2,10 @@ package com.github.hcsp.io;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.LineNumberReader;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class FileSearch {
@@ -11,18 +13,20 @@ public class FileSearch {
     // 如果指定的文件不存在或者无法被读取，抛出一个IllegalArgumentException。
     // 请不要让这个方法抛出checked exception
     public static int grep(File target, String text) {
-        try {
-            BufferedReader bf = new BufferedReader(new FileReader(target));
-            String currentLine = bf.readLine();
-            AtomicInteger count = new AtomicInteger(1);
-            while (currentLine != null) {
-                if (currentLine.contains(text)) {
-                    return count.get();
+        try (LineNumberReader lineNumberReader = new LineNumberReader(new FileReader(target))) {
+            do {
+                String line = lineNumberReader.readLine();
+                if (line == null) {
+                    break;
                 }
-                count.getAndIncrement();
-            }
+                if (line.indexOf(text) > 0) {
+                    return lineNumberReader.getLineNumber();
+                }
+            } while (true);
+        } catch (FileNotFoundException e) {
+            throw new IllegalArgumentException("文件不存在", e);
         } catch (IOException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("无法被读取", e);
         }
         return -1;
     }
