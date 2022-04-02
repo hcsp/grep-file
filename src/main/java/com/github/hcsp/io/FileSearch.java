@@ -2,7 +2,6 @@ package com.github.hcsp.io;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class FileSearch {
@@ -14,17 +13,16 @@ public class FileSearch {
             throw new IllegalArgumentException();
         }
 
-        try (Scanner sc = new Scanner(target))
-        {
+        try (Scanner sc = new Scanner(target)) {
             int count = 1;
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
-                if(line.contains(text))
+                if (line.contains(text)) {
                     return count;
+                }
                 count++;
             }
-        }
-        catch (IOException e) {
+        }catch (IOException e) {
             throw new IllegalArgumentException();
         }
         return -1;
