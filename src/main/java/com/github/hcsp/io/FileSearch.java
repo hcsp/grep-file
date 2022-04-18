@@ -1,8 +1,10 @@
 package com.github.hcsp.io;
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.LineIterator;
+
+import java.io.File;
+import java.io.IOException;
 
 public class FileSearch {
     // 找到第一个包含text的行的行号，行号从1开始计算。若没找到，则返回-1。
@@ -11,15 +13,15 @@ public class FileSearch {
     public static int grep(File target, String text) {
         int lineNumber = 0;
         try {
-            List<String> lines = Files.readAllLines(Paths.get(target.getPath()));
-            for (String line : lines) {
+            LineIterator fileContents = FileUtils.lineIterator(new File(String.valueOf(target)), "UTF-8");
+            while (fileContents.hasNext()) {
                 lineNumber++;
-                if (line.contains(text)) {
+                if (fileContents.nextLine().contains(text)) {
                     return lineNumber;
                 }
             }
         } catch (IOException e) {
-            throw new IllegalArgumentException("文件不存在或者无法被读取", e);
+            throw new IllegalArgumentException(e);
         }
         return -1;
     }
