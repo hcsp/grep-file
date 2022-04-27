@@ -37,7 +37,8 @@ public class FileSearch {
     }
 
     private static class NoFileReadException extends RuntimeException {
-        public NoFileReadException(String message, Throwable cause) {
+//        public NoFileReadException(String message, Throwable cause) {
+        NoFileReadException(String message, Throwable cause) {
             super(message, cause);
         }
     }
