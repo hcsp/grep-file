@@ -12,10 +12,12 @@ public class FileSearch {
         int id = 1;
         try {
             BufferedReader fr = new BufferedReader(new FileReader(target));
+            String str = null;
             while (true) {
-                if ((fr.readLine()) == null) {
+                str = fr.readLine();
+                if (str == null) {
                     break;
-                } else if (fr.readLine().contains(text)) {
+                } else if (str.contains(text)) {
                     return id;
                 } else {
                     id++;
