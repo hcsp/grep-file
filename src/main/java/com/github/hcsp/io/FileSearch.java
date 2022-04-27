@@ -9,39 +9,29 @@ public class FileSearch {
     public static int grep(File target, String text) {
         int id = 1;
         try {
-            BufferedReader fr = new BufferedReader(new FileReader(target));
-            String str = null;
-            while (true) {
-                str = fr.readLine();
-                if (str == null) {
-                    break;
-                } else if (str.contains(text)) {
-                    return id;
-                } else {
-                    id++;
+            try (BufferedReader fr = new BufferedReader(new FileReader(target))) {
+                String str = null;
+                while (true) {
+                    str = fr.readLine();
+                    if (str == null) {
+                        break;
+                    } else if (str.contains(text)) {
+                        return id;
+                    } else {
+                        id++;
+                    }
                 }
-
             }
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return -1;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("行号未找到", e);
         }
 
-        return -1;
     }
 
     public static void main(String[] args) {
         File projectDir = new File(System.getProperty("basedir", System.getProperty("user.dir")));
         System.out.println("结果行号：" + grep(new File(projectDir, "log.txt"), "BBB"));
     }
-//
-//    private static class NoFileReadException extends RuntimeException {
-////        public NoFileReadException(String message, Throwable cause) {
-//        NoFileReadException(String message, Throwable cause) {
-//            super(message, cause);
-//        }
-//    }
+
 }
