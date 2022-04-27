@@ -1,8 +1,6 @@
 package com.github.hcsp.io;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 
 public class FileSearch {
     // 找到第一个包含text的行的行号，行号从1开始计算。若没找到，则返回-1。
@@ -24,10 +22,10 @@ public class FileSearch {
                 }
 
             }
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | FileNotFoundException e) {
             e.printStackTrace();
-        } catch (Throwable e) {
-            throw new NoFileReadException("行号" + id, e);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return -1;
@@ -38,10 +36,10 @@ public class FileSearch {
         System.out.println("结果行号：" + grep(new File(projectDir, "log.txt"), "BBB"));
     }
 
-    private static class NoFileReadException extends RuntimeException {
-//        public NoFileReadException(String message, Throwable cause) {
-        NoFileReadException(String message, Throwable cause) {
-            super(message, cause);
-        }
-    }
+//    private static class NoFileReadException extends RuntimeException {
+////        public NoFileReadException(String message, Throwable cause) {
+//        NoFileReadException(String message, Throwable cause) {
+//            super(message, cause);
+//        }
+//    }
 }
