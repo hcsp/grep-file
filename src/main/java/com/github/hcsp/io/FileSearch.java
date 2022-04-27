@@ -13,7 +13,9 @@ public class FileSearch {
         try {
             BufferedReader fr = new BufferedReader(new FileReader(target));
             while (true) {
-                if (fr.readLine().contains(text)) {
+                if ((fr.readLine()) == null) {
+                    break;
+                } else if (fr.readLine().contains(text)) {
                     return id;
                 } else {
                     id++;
@@ -26,6 +28,7 @@ public class FileSearch {
             throw new NoFileReadException("行号" + id, e);
         }
 
+        return -1;
     }
 
     public static void main(String[] args) {
