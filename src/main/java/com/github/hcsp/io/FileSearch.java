@@ -22,7 +22,9 @@ public class FileSearch {
                 }
 
             }
-        } catch (IllegalArgumentException | FileNotFoundException e) {
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -35,7 +37,7 @@ public class FileSearch {
         File projectDir = new File(System.getProperty("basedir", System.getProperty("user.dir")));
         System.out.println("结果行号：" + grep(new File(projectDir, "log.txt"), "BBB"));
     }
-
+//
 //    private static class NoFileReadException extends RuntimeException {
 ////        public NoFileReadException(String message, Throwable cause) {
 //        NoFileReadException(String message, Throwable cause) {
