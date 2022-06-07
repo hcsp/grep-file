@@ -1,6 +1,7 @@
 package com.github.hcsp.io;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -24,8 +25,8 @@ public class FileSearch {
                 number++;
             }
             return -1;
-        } catch (IOException e) {
-            throw new IllegalArgumentException();
+        } catch (IOException e){
+            throw new IllegalArgumentException(e);
         }
     }
 
