@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class FileSearch {
@@ -14,10 +15,13 @@ public class FileSearch {
     public static int grep(File target, String text) {
         try {
             List<String> allLines = Files.readAllLines(target.toPath(), Charset.defaultCharset());
-            for (int i = 0; i < allLines.size(); i++) {
-                if (allLines.get(i).contains(text)) {
-                    return i + 1;
+            Iterator<String> iterator = allLines.iterator();
+            int number = 1;
+            while (iterator.hasNext()) {
+                if (iterator.next().contains(text)) {
+                    return number;
                 }
+                number++;
             }
             return -1;
         } catch (IOException e) {
