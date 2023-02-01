@@ -23,13 +23,13 @@ public class CommentCleanerTest {
     }
 
     @Test
-    public void returnCorrectValueWhenTargetTextNotFound() {
+    public void returnCorrectValueWhenTargetTextNotFound() throws IllegalAccessException {
         File projectRoot = new File(System.getProperty("basedir", System.getProperty("user.dir")));
         Assertions.assertEquals(-1, FileSearch.grep(new File(projectRoot, "log.txt"), "DDD"));
     }
 
     @Test
-    public void canWorkOnHugeFile() throws IOException {
+    public void canWorkOnHugeFile() throws IOException, IllegalAccessException {
         File projectRoot = new File(System.getProperty("basedir", System.getProperty("user.dir")));
         // Create a huge file: ~ 1024 bytes * 1024 * 64 lines = 64 MiB
         File hugeTextFile = new File(projectRoot, "target/hcsp-huge-tmp.txt");
