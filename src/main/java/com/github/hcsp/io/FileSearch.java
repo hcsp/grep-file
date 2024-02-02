@@ -1,20 +1,25 @@
 package com.github.hcsp.io;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.List;
 
 public class FileSearch {
     // 找到第一个包含text的行的行号，行号从1开始计算。若没找到，则返回-1。
     // 如果指定的文件不存在或者无法被读取，抛出一个IllegalArgumentException。
     // 请不要让这个方法抛出checked exception
     public static int grep(File target, String text) {
-        try {
-            List<String> strings = Files.readAllLines(target.toPath());
-            for (int i = 0; i < strings.size(); i++) {
-                if (strings.get(i).equals(text)) {
-                    return i + 1;
+        try (BufferedReader br = new BufferedReader(new FileReader(target));) {
+            int cnt = 0;
+            while (true) {
+                String s = br.readLine();
+                if (s == null) {
+                    break;
+                }
+                cnt++;
+                if (s.contains(text)) {
+                    return cnt;
                 }
             }
             return -1;
